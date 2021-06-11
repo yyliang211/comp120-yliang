@@ -14,7 +14,96 @@
         <div id="lyrics"></div>
 
         <script>
-        	// Complete this section and create a CSS file named style.css
+                // captions = ['Lisa: Come gather round, children,',
+                // 'It\'s high time ye learned',
+                // '\'Bout a hero named Homer',
+                // 'And a devil named Burns.',
+                // 'We\'ll march \'till we drop',
+                // 'The girls and the fellas.',
+                // 'We\'ll fight \'till the death',
+                // 'Or else fold like umbrellas.',
+                // 'So we\'ll march day and night',
+                // 'By the big cooling tower.',
+                // 'They have the plant',
+                // 'But we have the power.',
+                // 'Lenny: Now do "Classical Gas!"',
+                // 'So we\'ll march day and night',
+                // 'By the big cooling tower.',
+                // 'They have the plant',
+                // 'But we have the power.'];
+                captions = ['Lisa: <br> Come gather round, children, <br> It\'s high time ye learned <br> \'Bout a hero named Homer <br> And a devil named Burns.',
+                'We\'ll march \'till we drop <br> The girls and the fellas. <br> We\'ll fight \'till the death <br> Or else fold like umbrellas.',
+                'So we\'ll march day and night <br> By the big cooling tower. <br> They have the plant',
+                'But we have the power.',
+                'Lenny: <br> Now do "Classical Gas!"',
+                'So we\'ll march day and night <br> By the big cooling tower. <br> They have the plant',
+                'But we have the power.'];
+
+        	var video = document.getElementById("butwehavethepower");
+                // i = 0;
+                video.addEventListener("timeupdate", function() {
+                        var time = video.currentTime;
+                        if(6 < time && time < 17) {
+                                update(captions[0]);
+                        }
+                        if(17 < time && time < 27) {
+                                update(captions[1]);
+                        }
+                        if(27 < time && time < 37) {
+                                update("");
+                        }
+                        if(38 < time && time < 45) {
+                                update(captions[2]);
+                        }
+                        if(45 < time && time < 50) {
+                                update(captions[3]);
+                        }
+                        if(50 < time && time < 53) {
+                                update("");
+                        }
+                        if(53 < time && time < 55) {
+                                update(captions[4]);
+                        }
+                        if(55 < time && time < 72) {
+                                update("");
+                        }
+                        if(72 < time && time < 80) {
+                                update(captions[5]);
+                        }
+                        if(80 < time && time < 80) {
+                                update(captions[5]);
+                        }
+                        if(80 < time && time < 82) {
+                                update(captions[6]);
+                        }
+                        if(82 < time && time < 89) {
+                                update(captions[5]);
+                        }
+                        if(89 < time && time < 92) {
+                                update(captions[6]);
+                        }
+                        if(time > 92)
+                        {
+                                update("");
+                        }
+
+
+                });
+
+                // function between(start, end, time) {
+                //         if(start < time && time < end) {
+                //                 update(captions[i]);
+                //                 i++;
+                //         }
+                // }
+
+                function update(line) {
+                        updates = document.getElementById("lyrics");
+                        updates.innerHTML = "<p>" + line + "<p>";
+
+                }
+
+
         </script>
 </body>
 </html>

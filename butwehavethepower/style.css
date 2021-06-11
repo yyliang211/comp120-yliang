@@ -1,0 +1,21 @@
+#title {
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+        color: #faebd7;
+}
+
+body {
+        background-color: black;
+}
+
+video {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+}
+
+#lyrics {
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+        color: #faebd7;
+}
