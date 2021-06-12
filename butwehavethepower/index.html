@@ -14,23 +14,6 @@
         <div id="lyrics"></div>
 
         <script>
-                // captions = ['Lisa: Come gather round, children,',
-                // 'It\'s high time ye learned',
-                // '\'Bout a hero named Homer',
-                // 'And a devil named Burns.',
-                // 'We\'ll march \'till we drop',
-                // 'The girls and the fellas.',
-                // 'We\'ll fight \'till the death',
-                // 'Or else fold like umbrellas.',
-                // 'So we\'ll march day and night',
-                // 'By the big cooling tower.',
-                // 'They have the plant',
-                // 'But we have the power.',
-                // 'Lenny: Now do "Classical Gas!"',
-                // 'So we\'ll march day and night',
-                // 'By the big cooling tower.',
-                // 'They have the plant',
-                // 'But we have the power.'];
                 captions = ['Lisa: <br> Come gather round, children, <br> It\'s high time ye learned <br> \'Bout a hero named Homer <br> And a devil named Burns.',
                 'We\'ll march \'till we drop <br> The girls and the fellas. <br> We\'ll fight \'till the death <br> Or else fold like umbrellas.',
                 'So we\'ll march day and night <br> By the big cooling tower. <br> They have the plant',
@@ -40,7 +23,6 @@
                 'But we have the power.'];
 
         	var video = document.getElementById("butwehavethepower");
-                // i = 0;
                 video.addEventListener("timeupdate", function() {
                         var time = video.currentTime;
                         if(6 < time && time < 17) {
@@ -90,19 +72,11 @@
 
                 });
 
-                // function between(start, end, time) {
-                //         if(start < time && time < end) {
-                //                 update(captions[i]);
-                //                 i++;
-                //         }
-                // }
-
                 function update(line) {
                         updates = document.getElementById("lyrics");
                         updates.innerHTML = "<p>" + line + "</p>";
 
                 }
-
 
         </script>
 </body>
