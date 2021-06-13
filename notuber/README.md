@@ -11,8 +11,8 @@ Correctly implemented webpage displaying a Google map of vehicles of certain
 positions.
 
 ## Before Optimisation:
-Lighthouse metrics
---------------------
+Lighthouse metric | Time
+----------------- | -----
 First contentful paint | .2s
 Time to interactive | .7s
 Speed index | .8s
