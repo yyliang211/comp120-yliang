@@ -11,23 +11,19 @@ Correctly implemented webpage displaying a Google map of vehicles of certain
 positions.
 
 ## Before Optimisation:
-Lighthouse metric | Time
------------------ | -----
-First contentful paint | .2s
-Time to interactive | .7s
-Speed index | .8s
-Largest contentful paint | 1.1s
-
-### Network metrics:
-1.1MB transferred
-1.7MB resources
-Finish: 1.08s
-Load: 547ms
-
-### File Sizes:
-index.html: 469B
-style.css: 280B
-index.js: 1.4kB
+Metric | Before Optimisation | After Optimisation
+------- | -----------------  | -----------------
+Data transferred | 1.1 MB | 1.1 MB
+Resources loaded | 1.7 MB | 1.7 MB
+Finish | 1.08s | 1.03s
+Load | 547ms | 459ms
+Size: index.html | 469B | 469B
+Size: style.css | 280B | 173B
+Size: index.js | 1.4kB | 769B
+First contentful paint | .2s | .2s
+Time to interactive | .7s | .4s
+Speed index | .8s | .8s
+Largest contentful paint | 1.1s | 1.1s
 
 
 ### Hours spent:
