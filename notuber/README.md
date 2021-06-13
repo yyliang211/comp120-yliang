@@ -29,4 +29,4 @@ Speed index | .8s | .8s
 Largest contentful paint | 1.1s | 1.1s
 
 
-### Hours spent: 2h
+### Hours spent: 3h
