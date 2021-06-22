@@ -106,7 +106,7 @@ function findClosestCar(rideData) {
         path.setMap(map);
         //Update myMarker infowindow to show info of closest car
         google.maps.event.addListener(myMarker, 'click', function() {
-                infoWindow.setContent("Car: " + rideData[carIndex].username +  "<br>Distance to closest vehicle: " + minDistance + " miles.");
+                infoWindow.setContent("Closest Vehicle Name: " + rideData[carIndex].username +  "<br>Distance: " + minDistance + " miles");
                 infoWindow.open(map, myMarker);
         });
         carOnClick(distances, rideData);
@@ -116,7 +116,7 @@ function findClosestCar(rideData) {
 function carOnClick(distances, rideData) {
         allCarMarkers.forEach(function(element, index) {
                 google.maps.event.addListener(element, 'click', function() {
-                        infoWindow.setContent("Car: " + rideData[carIndex].username + "<br>Distance to you: " + distances[index] + " miles.");
+                        infoWindow.setContent("Vehicle Name: " + rideData[index].username + "<br>Distance to you: " + distances[index] + " miles");
                         infoWindow.open(map, element);
                 });
         });
