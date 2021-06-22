@@ -1,10 +1,16 @@
 let map;
+var my_pos = {lat: 0, lng: 0};
+var request = new XMLHttpRequest();
 
 function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-                center: {lat: 42.352271, lng: -71.05524200000001},
-                zoom: 14
-        });
+        //Setting map properties
+        var myOptions = {
+                zoom: 13,
+                center: {lat: 42.352271, lng: -71.05524200000001}
+        };
+
+        //Creating new map
+        map = new google.maps.Map(document.getElementById("map"), myOptions);
 
         jsonData = '[' +
         '{"vehicle id": "mXfkjrFw",' +
@@ -42,5 +48,47 @@ function initMap() {
                         map: map,
                         icon: "icon.png"
                 });
+        };
+
+        getMyLocation();
+        getCarsLocation();
+}
+
+function getMyLocation() {
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                        //Setting latlng literal to my location
+                        my_pos = {lat: pos.coords.latitude, lng: pos.coords.longitude};
+                        //Panning to my location
+                        map.panTo(my_pos);
+                        //Set marker at my location
+                        var marker = new google.maps.Marker({
+                                position: my_pos,
+                                map: map,
+                        });
+
+                });
         }
+        else {
+                alert("Browser doesn't support Geolocation services.");
+        }
+}
+
+function getCarsLocation() {
+        var url = "https://jordan-marsh.herokuapp.com/rides";
+        request.open("POST", url, true);
+        //Sending proper headers with the request
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                        console.log("SanityCheck");
+                        data = JSON.parse(request.responseText);
+                        console.log(data);
+                };
+        };
+        var param = "username=RKml7F0D&lat=" + String(my_pos.lat) + "&lng=" + String(my_pos.lng);
+        console.log(my_pos.lat);
+        console.log(param);
+        request.send(param);
+
 }
