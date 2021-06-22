@@ -1,19 +1,24 @@
 let map;
+//LatLng Object
 var my_pos = new google.maps.LatLng(0, 0);
-var infoWindow = new google.maps.InfoWindow();
-var service;
-var request = new XMLHttpRequest();
-var allCarMarkers = [];
+//Marker Object
 var myMarker;
+//Infowindow Object
+var infoWindow = new google.maps.InfoWindow();
+//Google Maps Places API
+var service;
+//For ride-hailing API
+var request = new XMLHttpRequest();
+//Array of all vehicle markers
+var allCarMarkers = [];
 
 function initMap() {
-        //Setting map properties
         var myOptions = {
                 zoom: 13,
                 center: {lat: 42.352271, lng: -71.05524200000001}
         };
-        //Creating new map
         map = new google.maps.Map(document.getElementById("map"), myOptions);
+        //Geolocation
         getMyLocation();
 }
 
@@ -21,7 +26,7 @@ function initMap() {
 function getMyLocation() {
         if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(pos) {
-                        //Setting latlng literal to my location
+                        //Setting latlng object to my location
                         my_pos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                         //Panning to my location
                         map.panTo(my_pos);
@@ -33,19 +38,22 @@ function getMyLocation() {
                         });
                         //Search for restaurants, bars and coffee shops wtihin a mile
                         aroundMe();
-                        //Call to server for vehicles
+                        //Request list of vehicles from ride-hailing API
                         getCarsLocation();
+                        //Infowindow for myMaker
                         google.maps.event.addListener(myMarker, 'click', function() {
                                 infoWindow.setContent(myMarker.title);
                                 infoWindow.open(map, myMarker);
                         });
                 });
         }
+        //If geolocation is not supported
         else {
                 alert("Browser doesn't support Geolocation services.");
         }
 }
 
+//Request list of vehicles from ride-hailing API
 function getCarsLocation() {
         var url = "https://jordan-marsh.herokuapp.com/rides";
         request.open("POST", url, true);
@@ -60,17 +68,17 @@ function getCarsLocation() {
                                         map: map,
                                         icon: "icon.png"
                                 });
-                                //Populate array of Marker objects for cars
                                 allCarMarkers.push(marker);
                         };
-                        findClosestCar();
+                        findClosestCar(rideData);
                 };
         };
         var param = "username=RKml7F0D&lat=" + String(my_pos.lat()) + "&lng=" + String(my_pos.lng());
         request.send(param);
 }
 
-function findClosestCar() {
+//Finds closest car
+function findClosestCar(rideData) {
         var carIndex = 0;
         var distances = [];
         var minDistance = Number.MAX_VALUE;
@@ -84,10 +92,8 @@ function findClosestCar() {
                         minDistance = distances[i];
                         carIndex = i;
                 }
-                console.log("For car " + i + " distance is " + distances[i] + " meters.");
 
         };
-        console.log("minimum distance is " + minDistance);
         //Plot polyline from my position to closest car
         var pathCoords = [my_pos, allCarMarkers[carIndex].getPosition()];
         var path = new google.maps.Polyline({
@@ -98,22 +104,20 @@ function findClosestCar() {
                 strokeWeight: 2,
         });
         path.setMap(map);
-        //Update infowindow of my marker to show distance to closest car
+        //Update myMarker infowindow to show info of closest car
         google.maps.event.addListener(myMarker, 'click', function() {
-                infoWindow.setContent("Distance to closest vehicle: " + minDistance + " miles.");
+                infoWindow.setContent("Car: " + rideData[carIndex].username +  "<br>Distance to closest vehicle: " + minDistance + " miles.");
                 infoWindow.open(map, myMarker);
         });
-        //Set infowindow to show distance to you if car marker is clicked
-        carOnClick(distances);
+        carOnClick(distances, rideData);
 }
 
-function carOnClick(distances) {
+//Set infowindow to show distance to you if car marker is clicked
+function carOnClick(distances, rideData) {
         allCarMarkers.forEach(function(element, index) {
                 google.maps.event.addListener(element, 'click', function() {
-                        infoWindow.setContent("Distance to you: " + distances[index] + " miles.");
+                        infoWindow.setContent("Car: " + rideData[carIndex].username + "<br>Distance to you: " + distances[index] + " miles.");
                         infoWindow.open(map, element);
-                        console.log("this is marker: " + index);
-                        console.log("distance is " + distances[index]);
                 });
         });
 }
@@ -128,7 +132,6 @@ function aroundMe() {
         };
         service.nearbySearch(request, (results, status) => {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(results);
                         for (i = 0; i < results.length; i++) {
                                 marker = new google.maps.Marker({
                                         position: results[i].geometry.location,
@@ -141,6 +144,7 @@ function aroundMe() {
 
 }
 
+//Set infoWindow of places found by Places API to show name
 function placeOnClick(resultPlace, marker) {
         google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.setContent(resultPlace.name);

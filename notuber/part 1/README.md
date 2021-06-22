@@ -29,10 +29,4 @@ Speed index | .8s | .8s
 Largest contentful paint | 1.1s | 1.1s
 
 
-### Hours spent: 2h
-start: 12:00
-end: 13:14
-start: 9:35pm
-end: 00:00
-start: 2:30
-end: 4:02
+### Hours spent: 3h
