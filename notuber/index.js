@@ -55,7 +55,7 @@ function getMyLocation() {
 
 //Request list of vehicles from ride-hailing API
 function getCarsLocation() {
-        var url = "https://jordan-marsh.herokuapp.com/rides";
+        var url = "https://vast-inlet-84814.herokuapp.com/rides";
         request.open("POST", url, true);
         //Sending proper headers with the request
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
