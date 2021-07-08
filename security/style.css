@@ -1,0 +1,23 @@
+#title {
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+        color: #ead7d6;
+        font-size: 20pt;
+}
+
+body {
+        background-color: #23272A;
+}
+
+h3 {
+        /* text-align: center; */
+        font-family: "Times New Roman", Times, serif;
+        color: #ead7d6;
+        font-size: 13pt;
+}
+
+p, ol {
+  font-family: "Times New Roman", Times, serif;
+        color: #ead7d6;
+        font-size: 10pt;
+}
