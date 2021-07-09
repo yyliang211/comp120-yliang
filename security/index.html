@@ -13,10 +13,10 @@
                         <p>Product is a ride-hailing service that is able to store and send passenger and vehicle data to clients. Uses Heroku and Heroku Postgres to deploy web app. I am hired to write this report on the security and privacy problems of this web app.</p>
                 <h3>Methodology</h3>
                         <p>I mainly used curl on the command line and URL parameter manipulation.</p>
-                        <p>For curl, I tried feeding different strings into the username parameter since lat and lng are restricted to  floats. I used this to test routes that use HTTP POST.</p>
+                        <p>For curl, I tried feeding different strings into the username parameter since the other params are restricted to  floats. I used this to test routes that use HTTP POST.</p>
                         <p>For URL manipulation, I also tried feeding strings to username param. I used this to test routes that use HTTP GET.</p>
                 <h3>Abstract of Findings</h3>
-                        <p>There are two main areas of security concerns. First the website is completely susceptible to attackers who are able to modify the website in anyway they like (redirect to other pages, show annoying messages, add/remove content) through Cross Site Scripting. An attacker can also crash the website.</p>
+                        <p>There are two main areas of security concerns. First the website is susceptible to Cross Site Scripting attacks. These attackers are able to modify the website in anyway they like redirect to other pages, show annoying messages, add/remove content, even crashing the website.</p>
                         <p>Second, an attacker can also hack into the databases linked to the webapp and retrieve, delete and modify information stored in those databases through SQL injection. This is very concerning especially if there will be sensitive information stored in those databases (passwords, financial information etc.)</p>
                 <h3>Issues Found</h3>
                         <ol>
@@ -47,8 +47,8 @@
                                 <p>Attack: This embeds a youtube video on the main page</p>
                                 <p>curl --data 'username=&lt;iframe width=&quot;1424&quot; height=&quot;626&quot; src=&quot;https://www.youtube.com/embed/2k0SmqbBIpQ&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&amp;lat=1&amp;lng=1' https://jordan-marsh.herokuapp.com/rides</p>
                                 <p>Proof:  </p>
-                                <img src="sqli_web.png" alt="After SQL Injection">
-                                <p>Resolution: The recommendations above should sanitize user input to the databse. Too err on the side of caution, add var sanitized_username = validator.espace(esult.rows[count].username);  below line 10 of app.get(/)</p>
+                                <img src="xss.png" alt="XSS via inserting into passengers database">
+                                <p>Resolution: The recommendations above should sanitize user input to the databse. Too err on the side of caution, add var sanitized_username = validator.espace(esult.rows[count].username);  below line 10 of app.get(/) to ensure that no malicious code is loaded onto the main page.</p>
                         </ol>
                 <h3>Conclusion</h3>
                         <p>In conclusion always sanitize user input by escaping them. This applies if more code needs to be added and more possible injection points are created.</p>

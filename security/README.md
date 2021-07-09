@@ -9,5 +9,6 @@ Collaborators: -
 
 July 7th 2021
 
-Hours spent:
-start 18:30
+Objective: Perform a security assessment of a potentially vulnerable system. (Ride hailing app)
+
+Hours spent: 3h
