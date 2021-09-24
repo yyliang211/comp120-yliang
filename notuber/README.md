@@ -19,4 +19,4 @@ Jun 22, 2021
 * Displays restaurants, bars, coffee shops within one mile radius of current location using Google Maps Places API
 * Meets all base and extra requirements, no incorrect implementations.
 
-### Hours spent: 8h
+### Hours spent: 6h
