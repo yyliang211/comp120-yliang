@@ -18,4 +18,4 @@ Jun 22, 2021
 * Infowindows on all vehicles showing distance to current location on click
 * Displays restaurants, bars, coffee shops within one mile radius of current location using Google Maps Places API
 
-### Hours spent: 5.5h
+### Hours spent: 6h
